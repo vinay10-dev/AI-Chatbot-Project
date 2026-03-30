@@ -5,13 +5,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 // Railway se Port uthao, agar nahi hai toh 8080 use karo
+var builder = WebApplication.CreateBuilder(args);
+
+// Railway Port Setup
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-
-// Batao ki app har IP (0.0.0.0) aur is Port par chale
 builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+
+// Services add karein
+builder.Services.AddControllers();
+
 var app = builder.Build();
-
-
 // Swagger (optional but useful)
 if (app.Environment.IsDevelopment())
 {
