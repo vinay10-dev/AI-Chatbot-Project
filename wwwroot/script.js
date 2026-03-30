@@ -34,7 +34,7 @@ const generateBotResponse = async (incomingMessageDiv) => {
     debugger;
 
     try {
-        const response = await fetch("https://username.app.n8n.cloud/webhook/chat", {
+        const response = await fetch("https://vinay01jan.app.n8n.cloud/webhook/chat", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
