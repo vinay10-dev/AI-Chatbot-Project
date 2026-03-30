@@ -10,7 +10,13 @@ public class RetellController : ControllerBase
 {
     //  Store full chat history per user
     private static readonly Dictionary<string, List<object>> UserHistory = new();
+    private readonly IConfiguration _config;
 
+    // Constructor mein configuration inject karein
+    public RetellController(IConfiguration config)
+    {
+        _config = config;
+    }
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] JsonElement data)
     {
@@ -48,7 +54,7 @@ public class RetellController : ControllerBase
 
         using var client = new HttpClient();
 
-        var apiKey = "YOUR_API_KEY_HERE";  //  Move to env variable in production
+       var apiKey = _config["ApiSettings:OpenRouterKey"];   //  Move to env variable in production
 
         client.DefaultRequestHeaders.Authorization =
             new AuthenticationHeaderValue("Bearer", apiKey);
