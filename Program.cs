@@ -10,7 +10,7 @@ var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 // Batao ki app har IP (0.0.0.0) aur is Port par chale
 builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 var app = builder.Build();
-var app = builder.Build();
+
 
 // Swagger (optional but useful)
 if (app.Environment.IsDevelopment())
