@@ -1,32 +1,39 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Services
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-// Railway se Port uthao, agar nahi hai toh 8080 use karo
-var builder = WebApplication.CreateBuilder(args);
-
-// Railway Port Setup
+// 1. Railway Port Setup (Sirf ek baar builder use karein)
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
-// Services add karein
+// 2. Services add karein
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
-// Swagger (optional but useful)
+// 3. CORS Policy (Mobile aur n8n ke liye zaroori hai)
+builder.Services.AddCors(options => {
+    options.AddPolicy("AllowAll", policy => {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
+var app = builder.Build(); // YE SIRF EK BAAR HONA CHAHIYE
+
+// 4. Middleware Setup
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-// Static files (Frontend UI)
+// CORS apply karein
+app.UseCors("AllowAll");
+
+// Frontend files dikhane ke liye
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-// Routing
 app.MapControllers();
 
 app.Run();
