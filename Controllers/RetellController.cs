@@ -8,9 +8,16 @@ using System.Net.Http.Headers;
 [Route("api/[controller]")]
 public class RetellController : ControllerBase
 {
-    //  Store full chat history per user
+    //  Store full chat history per user//i am vinay
     private static readonly Dictionary<string, List<object>> UserHistory = new();
+    // Ye Constructor zaroori hai:
+    private readonly IConfiguration _configuration;
 
+    // Ye Constructor zaroori hai:
+    public RetellController(IConfiguration configuration)
+    {
+        _configuration = configuration;
+    }
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] JsonElement data)
     {
@@ -48,8 +55,8 @@ public class RetellController : ControllerBase
 
         using var client = new HttpClient();
 
-        var apiKey = "YOUR_API_KEY_HERE";  //  Move to env variable in production
-
+        //  Move to env variable in production
+        var apiKey = _configuration["ApiSettings:OpenRouterKey"];
         client.DefaultRequestHeaders.Authorization =
             new AuthenticationHeaderValue("Bearer", apiKey);
 

@@ -1,24 +1,24 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Services
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options => {
+    options.AddPolicy("AllowAll", policy => {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
+app.UseHttpsRedirection();
+app.UseCors("AllowAll");
 
-// Swagger (optional but useful)
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-// Static files (Frontend UI)
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-// Routing
 app.MapControllers();
 
 app.Run();
