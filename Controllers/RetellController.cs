@@ -8,7 +8,8 @@ using System.Net.Http.Headers;
 [Route("api/[controller]")]
 public class RetellController : ControllerBase
 {
-    //  Store full chat history per user//i am vinay
+    //  Store full chat history per user//i am vinay singh
+    //private static readonly Dictionary<string, List<object>> UserHistory = new();
     private static readonly Dictionary<string, List<object>> UserHistory = new();
     // Ye Constructor zaroori hai:
     private readonly IConfiguration _configuration;
