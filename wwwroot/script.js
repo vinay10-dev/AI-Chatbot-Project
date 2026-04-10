@@ -34,8 +34,9 @@ const generateBotResponse = async (incomingMessageDiv) => {
     debugger;
 
     try {
-        const response = await fetch("https://vinay01jan.app.n8n.cloud/webhook/chat", {
-            method: "POST",
+       // const response = await fetch("https://vinay01jan.app.n8n.cloud/webhook/webhook-intent-handler", {//https://vinay01jan.app.n8n.cloud/webhook/adc6433d-a64a-455d-ac65-b702a4da7e0d
+        const response = await fetch("https://vinay01jan.app.n8n.cloud/webhook/97be6f16-493a-4220-a495-c317fd815697", {
+        method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -47,7 +48,7 @@ const generateBotResponse = async (incomingMessageDiv) => {
 
         const data = await response.json();
 
-        messageElement.innerText = data.response;
+        messageElement.innerText = data.reply;
 
     } catch (error) {
         console.log(error);
