@@ -15,7 +15,7 @@ A sophisticated automation workflow that uses Large Language Models to interpret
 - **API:** Custom REST Endpoint (via ngrok)
 
 ## 📊 Workflow Visualization
-![Workflow Screenshot](workflow.png)
+![Workflow Screenshot](workflow.PNG)
 
 ## 📖 How it Works
 1. User sends a message via Webhook.
